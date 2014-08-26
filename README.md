@@ -24,6 +24,7 @@ Three builds are created:
 Usage: ./enum [-hu]
 -h, --help              This text
 -u, --unattended        Continuously rescan for additional semaphores
+-c, --create-mutex      Create a permissive semaphore to demonstrate what can happen
 ```
 
 ##Future work

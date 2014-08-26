@@ -134,21 +134,26 @@ struct sems_seen *find_sem(struct sems_seen *seen, char *name)
 
 int main(int argc, char **argv)
 {
-    /* Uncomment the below line if there aren't any permissive semaphores to play with */
-    sem_t *p = sem_open("quack", O_CREAT, S_IRWXU);
+    sem_t *quack;
     DIR *d;
     struct dirent *dir;
     struct timeval t;
     struct sems_seen seen = {0};
-    int unattended = argc == 2 && (!strcmp(argv[1], "-u") || !strcmp(argv[1], "--unattended"));
+    int unattended = (argc == 2 || argc == 3) && (!strcmp(argv[1], "-u") || !strcmp(argv[1], "--unattended"));
+    int createmutex = (argc == 2 || argc == 3) && (!strcmp(argv[1], "-c") || !strcmp(argv[1], "--create-mutex"));
 
-    /* Help parameters are a placebo as any flags other than unattended trigger usage */
-    if (argc >= 2 && !unattended) {
+    /* Help parameters are a placebo as any flags other than unattended/create-mutex trigger usage */
+    if (argc >= 4 && !unattended) {
         printf("Usage: %s [-hu]\n", argv[0]);
         printf("-h, --help              This text\n");
-        printf("-u, --unattended        Continuously rescan for additional semaphores\n\n");
+        printf("-u, --unattended        Continuously rescan for additional semaphores\n");
+        printf("-c, --create-mutex      Create a permissive semaphore to demonstrate what can happen\n\n");
         return 0;
     }
+
+    /* Create a permissive semaphores to play with */
+    if (createmutex)
+        quack = sem_open("quack", O_CREAT, S_IRWXU);
 
     /* Seed rng to assist phuck */
     gettimeofday(&t, NULL);
