@@ -8,7 +8,7 @@ SRCDIR=src
 # --------------------------------
 
 CC=gcc
-CFLAGS=-Wall -Wextra -std=c99 -pthread -D_GNU_SOURCE -Wno-parentheses
+CFLAGS=-Wall -Wextra -std=c99 -pthread -D_GNU_SOURCE -Wno-parentheses -Wno-unused-but-set-variable
 CFLAGSD=-ggdb -fstack-protector-all
 CFLAGSO=-O3 -fomit-frame-pointer -D SILENT
 TARGETS=$(TARGET) d$(TARGET) o$(TARGET)

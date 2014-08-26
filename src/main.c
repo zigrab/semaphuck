@@ -151,7 +151,7 @@ int main(int argc, char **argv)
         return 0;
     }
 
-    /* Create a permissive semaphores to play with */
+    /* Create a permissive semaphore to play with */
     if (createmutex)
         quack = sem_open("quack", O_CREAT, S_IRWXU);
 
