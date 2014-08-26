@@ -127,6 +127,7 @@ struct sems_seen *find_sem(struct sems_seen *seen, char *name)
             last->next->next = NULL;
         } else {
             free(last->next);
+            last->next = NULL;
         }
     }
     return NULL;
